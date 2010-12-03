@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Demo - Inline Edit Plugin for jQuery</title>
+	<style>
+		body {
+			font: 13px/1.6 helvetica,arial,freesans,clean,sans-serif;
+			color: #0D0D0D;
+			position: relative;
+			margin: 10px 0 30px;
+		}
+		#container {
+			margin: 10px auto;
+			width: 700px;
+		}
+		input[type=text], textarea { padding: .3em; width: 97%; }
+		input[type=button] { padding: .5em; }
+		textarea { height: 150px; font-size: 1em; }
+		
+		.editable { padding: 10px; background: #eee; cursor: pointer; }
+		.editable-hover { background: #ccc; }
+		.editable-wrap { margin: 10px 0; }
+		.editable-cancel { margin-left: 10px; }
+		
+		.message {
+			background: #E6EFC2;
+			border-bottom: 2px solid #C6D880;
+			color: #264409;
+			padding: .7em;
+			position: fixed; top: 0; right: 0; left: 0;
+			text-align: center;
+		}
+		.note { font: 9px normal; color: #c00; }
+	</style>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+	<script src="../src/jquery.inlineEdit.js"></script>
+	<script>
+		var onComplete = function(d) {
+			$('.message').text('Complete').hide().slideDown();
+			setTimeout(function() {
+				$('.message').slideUp();
+			}, 2000);
+		}
+	</script>
+</head>
+<body>
+	<div id="container">
+        <h1>Demo Inline Edit Plugin for jQuery</h1>
+		<p>click text to edit inline.</p>
+		<h2>Text Input</h2>
+		<div class="editable editable-text" rel="form-name">Inline Edit</div>
+		<script>
+			$('.editable-text').inlineEdit({
+				type: 'text',
+				complete: onComplete
+			});
+		</script>
+		<h2>Textarea</h2>
+		<div class="editable editable-textarea" rel="form-name">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque non orci lorem, ut dignissim nisl. Phasellus ut elit id libero tempus sagittis. Phasellus quis justo a orci faucibus aliquet. Vestibulum viverra convallis orci at bibendum. In molestie sem non nibh semper vel congue ante pulvinar. Nullam faucibus felis quis eros gravida ultrices commodo felis porta. Donec eros tortor, fermentum ac egestas sed, egestas nec risus. Nulla facilisi. Aliquam ac sollicitudin justo. Aliquam non mattis sem. Phasellus lacinia iaculis erat sed auctor. Morbi et adipiscing massa. Vivamus porta lectus malesuada risus aliquam eu tempus leo interdum. In consequat, arcu non blandit eleifend, urna nulla hendrerit sem, eget blandit sem nisi et nibh. Cras ut ante arcu, at fringilla augue. </div>
+		<script>
+			$('.editable-textarea').inlineEdit({
+				type: 'textarea',
+				complete: onComplete
+			});
+		</script>
+		<h2>Select box </h2>
+		<div class="editable editable-select" rel="form-name">2010</div>
+		<script>
+			$('.editable-select').inlineEdit({
+				type: 'select',
+				complete: onComplete,
+				select: [2010, 2011, 2012]
+			});
+		</script>
+		<h2>Radio button</h2>
+		<div class="editable editable-radio" rel="form-name">male</div>
+		<script>
+			$('.editable-radio').inlineEdit({
+				type: 'radio',
+				complete: onComplete,
+				select: ['male', 'female']
+			});
+		</script>
+		<h2>Check box <span class="note">still not working</span></h2>
+		<div class="editable editable-check" rel="form-name">check1</div>
+		<script>
+			$('.editable-check').inlineEdit({
+				type: 'check',
+				complete: onComplete,
+				select: ['check1', 'check2', 'check3', 'check4', 'check5']
+			});
+		</script>
+		<hr />
+	</div>
+	<div class="message" style="display: none;"></div>
+</body>
+</html>
